@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05070f">
+  <title>로켓 발사 시뮬레이터</title>
+  <meta name="description" content="지상 이륙부터 대기권 돌파, 1단 분리, 페어링 분리, 궤도 진입과 위성 분리까지 체험하는 웹 로켓 시뮬레이터">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">🚀</span>
+      <h1>로켓 발사 시뮬레이터</h1>
+    </div>
+    <span class="sub">지상 이륙 → 단 분리 → 궤도 진입</span>
+  </header>
+
+  <main class="layout">
+    <!-- 1. 시뮬레이션 화면 -->
+    <section class="sim" id="sim" aria-label="시뮬레이션 화면">
+      <canvas id="scene"></canvas>
+      <div class="hud">
+        <div class="tele">
+          <div class="row"><span>T</span><b id="tTime">-00:10</b></div>
+          <div class="row"><span>고도</span><b id="tAlt">0.0 km</b></div>
+          <div class="row"><span>속도</span><b id="tVel">0 km/h</b></div>
+          <div class="row"><span>상태</span><b id="tStage">발사 준비</b></div>
+        </div>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+      <button class="big-start" id="bigStart" type="button">▶ 발사 시작</button>
+    </section>
+
+    <!-- 2. 시뮬레이션 조작 스페이스 -->
+    <section class="controls" aria-label="시뮬레이션 조작">
+      <div class="btn-row">
+        <button id="btnPlay" class="btn primary" type="button">▶ 시작</button>
+        <button id="btnReplay" class="btn" type="button">↺ 리플레이</button>
+        <button id="btnNext" class="btn" type="button">⏭ 다음 단계</button>
+      </div>
+      <div class="speed-row">
+        <span class="label">재생 속도</span>
+        <div class="seg" role="group" aria-label="재생 속도">
+          <button type="button" data-speed="0.5">0.5×</button>
+          <button type="button" data-speed="1" class="on">1×</button>
+          <button type="button" data-speed="2">2×</button>
+          <button type="button" data-speed="4">4×</button>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="track-wrap">
+          <input type="range" id="scrub" min="-10" max="560" step="0.1" value="-10" aria-label="미션 타임라인">
+          <div class="ticks" id="ticks" aria-hidden="true"></div>
+        </div>
+        <div class="tl-labels"><span>T-10s</span><span id="tlNow">발사 준비</span><span>T+9:20</span></div>
+      </div>
+      <p class="hint">단축키: <kbd>Space</kbd> 시작/정지 · <kbd>R</kbd> 리플레이 · <kbd>→</kbd> 다음 단계</p>
+    </section>
+
+    <!-- 3. 시뮬레이션 과정 설명 -->
+    <section class="explain" id="explain" aria-label="시뮬레이션 과정 설명">
+      <div class="now">
+        <span class="eyebrow" id="nowTime">T-00:10</span>
+        <h2 id="nowTitle">발사 준비</h2>
+        <p id="nowDesc"></p>
+      </div>
+      <h3 class="list-title">비행 단계 <small>(누르면 해당 장면으로 이동)</small></h3>
+      <ol class="phases" id="phaseList"></ol>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
