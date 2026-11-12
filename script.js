@@ -610,7 +610,7 @@
       if (box.scrollHeight > box.clientHeight + 4 && getComputedStyle(box).overflowY === 'auto') {
         const li = items[idx];
         const nowH = box.querySelector('.now').offsetHeight;
-        const target = li.offsetTop - nowH - 70;
+        const target = box.scrollTop + (li.getBoundingClientRect().top - box.getBoundingClientRect().top) - nowH - 28;
         box.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
       }
     }
