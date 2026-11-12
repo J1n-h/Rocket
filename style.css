@@ -48,7 +48,7 @@ button { font: inherit; color: inherit; }
 }
 .sim { grid-area: sim; }
 .controls { grid-area: controls; }
-.explain { grid-area: explain; }
+.explain { grid-area: explain; position: relative; }
 
 .sim {
   position: relative;
