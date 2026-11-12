@@ -118,6 +118,13 @@ button { font: inherit; color: inherit; }
   transition: opacity .25s, transform .25s;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+/* 시뮬레이션 화면이 좁으면(휴대폰) 알림을 아래쪽으로 내려 텔레메트리를 가리지 않게 */
+.sim { container-type: inline-size; }
+@container (max-width: 720px) {
+  .toast { top: auto; bottom: 14px; transform: translate(-50%, 8px); max-width: calc(100% - 24px); overflow: hidden; text-overflow: ellipsis; }
+  .toast.show { transform: translate(-50%, 0); }
+  .big-start { bottom: 64px; }
+}
 .big-start {
   position: absolute; left: 50%; bottom: 14%;
   transform: translateX(-50%);

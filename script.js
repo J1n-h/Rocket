@@ -573,7 +573,12 @@
     const li = document.createElement('li');
     const b = document.createElement('button');
     b.type = 'button';
-    b.innerHTML = `<span class="time">${fmtT(p.t)}</span><span class="name">${p.title}</span><span class="mark"></span>`;
+    for (const [cls, text] of [['time', fmtT(p.t)], ['name', p.title], ['mark', '']]) {
+      const span = document.createElement('span');
+      span.className = cls;
+      span.textContent = text;
+      b.appendChild(span);
+    }
     b.addEventListener('click', () => { seek(i === 0 ? T_START : p.t - 1.5); if (!running) play(); });
     li.appendChild(b);
     ui.list.appendChild(li);
